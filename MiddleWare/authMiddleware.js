@@ -3,30 +3,29 @@ import User from "../Model/User.js";
 
 const protect = async (req, res, next) => {
   let token = req.headers.authorization;
-   token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
 
-  if (!token) {
+  if (!token || !token.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Not authorized, no token" });
   }
 
   try {
+    // Extract token ("Bearer xyz")
     token = token.split(" ")[1];
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // FIXED
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // attach user to request
+    // Find user
     req.user = await User.findById(decoded.id).select("-password");
 
     if (!req.user) {
       return res.status(401).json({ message: "User not found" });
     }
 
-    next();
+    next(); // continue
   } catch (error) {
     console.log(error);
-    return res.status(401).json({ message: "Invalid Token" });
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
 
