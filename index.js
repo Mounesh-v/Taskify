@@ -9,6 +9,7 @@ ConnectDb();
 app.use(cors({
   origin: [
     "http://localhost:5173",
+    "https://taskify-frontend-qtjh.vercel.app",
   ],
   credentials: true
 }));
