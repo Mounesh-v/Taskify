@@ -6,7 +6,14 @@ import cors from "cors";
 const app = express();
 dotenv.config();
 ConnectDb();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://taskify-frontend-alpha.vercel.app"
+  ],
+  credentials: true
+}));
+
 
 app.use(express.json());
 
