@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://taskify-frontend-t84x.vercel.app", // ✔ correct domain
+      "https://taskify-frontend-t84x.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
