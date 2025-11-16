@@ -11,6 +11,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://taskify-frontend-t84x.vercel.app",
+      "https://taskify-frontend-e63u.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
